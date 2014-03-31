@@ -280,6 +280,13 @@ class Command(NoArgsCommand):
                 except Exception as e:
                     raise CommandError("An error occured during rendering %s: "
                                        "%s" % (template.template_name, e))
+                else:
+                    file_name = u'%s_compressed' % template.template_name
+                    myFile = open(file_name, 'w')
+                    myFile.write(result)
+                    myFile.close()
+                    print 'stored', file_name
+
                 offline_manifest[key] = result
                 context.pop()
                 results.append(result)
